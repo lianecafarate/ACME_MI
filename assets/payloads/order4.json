@@ -1,0 +1,42 @@
+{
+    "orderId": "ORD-1002",
+    "customer": {
+        "customerId": "CUST-2001",
+        "name": "Jane Doe",
+        "email": "jane.doe@example.com",
+        "phone": "+1-555-1234"
+    },
+    "items": [
+        {
+            "productId": "PROD-003",
+            "name": "Bluetooth Headphones",
+            "quantity": 1,
+            "unitPrice": 60
+        },
+        {
+            "productId": "PROD-004",
+            "name": "USB-C Hub",
+            "quantity": 3,
+            "unitPrice": 30
+        }
+    ],
+    "shipping": {
+        "address": {
+            "street": "123 Elm St",
+            "city": "Springfield",
+            "state": "IL",
+            "zip": "62704",
+            "country": "USA"
+        },
+        "method": "Express",
+        "cost": 15
+    },
+    "payment": {
+        "method": "Credit Card",
+        "transactionId": "TXN-78911",
+        "totalAmount": 195
+    },
+    "status": "Shipped",
+    "orderDate": "04/21/2025",
+    "orderTime": "16:45:00"
+}

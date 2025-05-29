@@ -1,0 +1,41 @@
+{
+  "id": "1",
+  "customerId": "user12345",
+  "date": "2025-04-17T14:56:00Z",
+  "shippingAddress": {
+    "street": "123 Main Street",
+    "city": "Foster City",
+    "state": "CA",
+    "zipCode": "94404",
+    "country": "USA"
+  },
+  "billingAddress": {
+    "street": "456 Oak Avenue",
+    "city": "San Francisco",
+    "state": "CA",
+    "zipCode": "94107",
+    "country": "USA"
+  },
+  "items": [
+    {
+      "productId": "PROD-ABC-123",
+      "quantity": 2,
+      "unitPrice": 25.99
+    },
+    {
+      "productId": "PROD-XYZ-456",
+      "quantity": 1,
+      "unitPrice": 99.50
+    }
+  ],
+  "totalAmount": 151.48,
+  "paymentMethod": "Credit Card",
+  "paymentDetails": {
+    "cardNumber": "************1234",
+    "expiryDate": "12/2026",
+    "cvv": "***"
+  },
+  "shippingMethod": "Standard",
+  "couponCode": "SUMMER20",
+  "notes": "Please include a gift message."
+}
