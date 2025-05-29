@@ -15,6 +15,7 @@ This project demonstrates a solution for ACME Inc., a fictional e-commerce compa
 - [Technologies Used](#technologies-used)
 - [Prerequisites](#prerequisites)
 - [Database Script](#database-script)
+- [Tips](#tips)
 
 ## Scenario
 
@@ -82,4 +83,7 @@ The proposed solution leverages the WSO2 platform to ensure guaranteed order del
 ![DB Diagram](https://github.com/lianecafarate/ACME_MI/blob/main/assets/images/DBDiagram.png)
 File: [https://github.com/lianecafarate/ACME_MI/blob/main/assets/database/mysql.sql](https://github.com/lianecafarate/ACME_MI/blob/main/assets/database/mysql.sql)
 
+## Tips
+* Don't forget to edit the database user and password.
+* Don't forget to edit AWS SQS secrets and region.
 
