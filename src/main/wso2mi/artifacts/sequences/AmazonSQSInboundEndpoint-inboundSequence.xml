@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <sequence name="AmazonSQSInboundEndpoint-inboundSequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log category="INFO" logMessageID="true" logFullPayload="true">
+        <message>Raw Payload from SQS</message>
+    </log>
+    <variable name="sqsPayloadString" 
+        expression="//soapenv:Body/text:text/text()" 
+        type="STRING" 
+        xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+        xmlns:text="http://ws.apache.org/commons/ns/payload"/>
+    
+    <log category="INFO">
+        <message>Extracted JSON String: ${vars.sqsPayloadString}</message>
+    </log>
+
+    <!-- Fix the payload factory to properly parse the JSON string -->
+    <payloadFactory media-type="json">
+        <format>${vars.sqsPayloadString}</format>
+    </payloadFactory>
+    
+    <log category="INFO" logMessageID="true" logFullPayload="true">
+        <message>JSON Payload After Extraction</message>
+    </log>
+
+    <sequence key="OrderDateTransformation"/>
+    <sequence key="TimestampTransformation"/>
+    <sequence key="DBStorage"/>
+</sequence>

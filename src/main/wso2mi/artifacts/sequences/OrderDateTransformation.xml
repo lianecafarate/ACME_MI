@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="OrderDateTransformation" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    
+    <script language="js">
+        <![CDATA[var date = mc.getPayloadJSON().orderDate; // "mm/dd/yyyy"
+        var parts = date.split("/");
+        var transformedDate = parts[2] + "-" + parts[0] + "-" + parts[1];
+        var payload = mc.getPayloadJSON();
+        payload.orderDate = transformedDate;
+        mc.setPayloadJSON(payload);]]>
+    </script>
+    <log category="INFO" logMessageID="false" logFullPayload="true">
+        <message>Payload with transformed orderDate (yyyy-mm-dd)</message>
+    </log>
+</sequence>

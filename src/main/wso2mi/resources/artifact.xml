@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<artifacts>
+  <artifact name="resources_datamapper_TimestampDM_TimestampDM_dmc" groupId="com.microintegrator.projects" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+    <item>
+      <file>TimestampDM.dmc</file>
+      <path>/_system/governance/mi-resources/datamapper/TimestampDM</path>
+      <mediaType>text/plain</mediaType>
+      <properties></properties>
+    </item>
+  </artifact>
+  <artifact name="resources_datamapper_TimestampDM_TimestampDM_inputSchema_json" groupId="com.microintegrator.projects" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+    <item>
+      <file>TimestampDM_inputSchema.json</file>
+      <path>/_system/governance/mi-resources/datamapper/TimestampDM</path>
+      <mediaType>text/plain</mediaType>
+      <properties></properties>
+    </item>
+  </artifact>
+  <artifact name="resources_datamapper_TimestampDM_TimestampDM_outputSchema_json" groupId="com.microintegrator.projects" version="1.0.0" type="registry/resource" serverRole="EnterpriseIntegrator">
+    <item>
+      <file>TimestampDM_outputSchema.json</file>
+      <path>/_system/governance/mi-resources/datamapper/TimestampDM</path>
+      <mediaType>text/plain</mediaType>
+      <properties/>
+    </item>
+  </artifact>
+</artifacts>

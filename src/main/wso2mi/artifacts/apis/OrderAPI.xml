@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/orders" name="OrderAPI" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" uri-template="/">
+        <inSequence>
+            <log category="INFO" logMessageID="false" logFullPayload="true" description="Starting the incoming order request">
+                <message>Incoming Order Request</message>
+            </log>
+            <property name="orderPayload" expression="json-eval($)" scope="default" type="STRING"/>
+            <sequence key="QueueCreation"/>
+            <sequence key="QueueMessageSending"/>
+        </inSequence>
+    </resource>
+</api>

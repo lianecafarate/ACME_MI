@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="DBOrderItemInsertion" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <!-- Store orderId in a property for reuse inside the loop -->
+    <property name="orderId" expression="json-eval($.orderId)" scope="default" type="STRING"/>
+    <foreach collection="${payload.items}" parallel-execution="false" update-original="true" continue-without-aggregation="false">
+        <sequence>
+            <dbreport>
+                <connection>
+                    <pool>
+                        <driver>com.mysql.cj.jdbc.Driver</driver>
+                        <url>jdbc:mysql://localhost:3306/acme_inc</url>
+                        <user>${env:DB_USER}</user>
+                        <password>${env:DB_PASSWORD}</password>
+                    </pool>
+                </connection>
+                <!-- Order Items Insertion -->
+                <statement>
+                    <sql><![CDATA[
+                        INSERT INTO order_items (order_id, product_id, quantity, unit_price)
+                        VALUES (?, ?, ?, ?)
+                    ]]></sql>
+                    <parameter expression="get-property('orderId')" type="VARCHAR"/>
+                    <parameter expression="json-eval($.productId)" type="VARCHAR"/>
+                    <parameter expression="json-eval($.quantity)" type="INTEGER"/>
+                    <parameter expression="json-eval($.unitPrice)" type="DECIMAL"/>
+                </statement>
+            </dbreport>
+            <log category="INFO" logMessageID="false" logFullPayload="false">
+                <message>Order Item (${payload.productId}) inserted successfully!</message>
+            </log>
+        </sequence>
+    </foreach>
+</sequence>

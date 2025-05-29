@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="OrderTimestampTransformation" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <script language="js"><![CDATA[
+        var timestamp = mc.getProperty("lastOrderTimestamp");
+        if (timestamp != null) {
+            var date = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(timestamp);
+            var formattedDate = new java.text.SimpleDateFormat("MM/dd/yyyy").format(date);
+            mc.setProperty("lastOrderDate", formattedDate);
+        }
+    ]]></script>
+</sequence>

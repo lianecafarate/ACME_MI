@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="DBStorage" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <dbreport>
+        <connection>
+            <pool>
+                <driver>com.mysql.cj.jdbc.Driver</driver>
+                <url>jdbc:mysql://localhost:3306/acme_inc</url>
+                <user>${env:DB_USER}</user>
+                <password>${env:DB_PASSWORD}</password>
+            </pool>
+        </connection>
+        <!--Customer Insertion-->
+        <statement>
+            <sql><![CDATA[
+                INSERT INTO customers (customer_id, name, email, phone) 
+                VALUES (?, ?, ?, ?)
+            ]]></sql>
+            <parameter expression="json-eval($.customer.customerId)" type="VARCHAR"/>
+            <parameter expression="json-eval($.customer.name)" type="VARCHAR"/>
+            <parameter expression="json-eval($.customer.email)" type="VARCHAR"/>
+            <parameter expression="json-eval($.customer.phone)" type="VARCHAR"/>
+        </statement>
+         <!-- Order Insertion -->
+        <statement>
+            <sql><![CDATA[
+                INSERT INTO orders (order_id, customer_id, status, order_timestamp, 
+                    shipping_method, shipping_cost, shipping_street, shipping_city, 
+                    shipping_state, shipping_zip, shipping_country, 
+                    payment_method, transaction_id, total_amount) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ]]></sql>
+            <parameter expression="json-eval($.orderId)" type="VARCHAR"/>
+            <parameter expression="json-eval($.customer.customerId)" type="VARCHAR"/>
+            <parameter expression="json-eval($.status)" type="VARCHAR"/>
+            <parameter expression="json-eval($.orderTimeStamp)" type="TIMESTAMP"/>
+            <!-- Shipping Details -->
+            <parameter expression="json-eval($.shipping.method)" type="VARCHAR"/>
+            <parameter expression="json-eval($.shipping.cost)" type="DECIMAL"/>
+            <parameter expression="json-eval($.shipping.address.street)" type="VARCHAR"/>
+            <parameter expression="json-eval($.shipping.address.city)" type="VARCHAR"/>
+            <parameter expression="json-eval($.shipping.address.state)" type="VARCHAR"/>
+            <parameter expression="json-eval($.shipping.address.zip)" type="VARCHAR"/>
+            <parameter expression="json-eval($.shipping.address.country)" type="VARCHAR"/>
+            <!-- Payment Details -->
+            <parameter expression="json-eval($.payment.method)" type="VARCHAR"/>
+            <parameter expression="json-eval($.payment.transactionId)" type="VARCHAR"/>
+            <parameter expression="json-eval($.payment.totalAmount)" type="DECIMAL"/>
+        </statement>
+        <!-- Order Items Insertion -->
+    </dbreport>
+    <log category="INFO" logMessageID="false" logFullPayload="true">
+        <message>Customer and order data inserted succesfully!</message>
+    </log>
+    <!--Saving orderId to be used later-->
+    <property name="orderId" expression="json-eval($.orderId)" scope="default" type="STRING"/>
+    <sequence key="DBOrderItemInsertion"/>
+    <log category="INFO" logMessageID="false" logFullPayload="false">
+        <message>Order items inserted successfully!</message>
+    </log>
+</sequence>

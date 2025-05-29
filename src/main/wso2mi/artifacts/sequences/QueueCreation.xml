@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="QueueCreation" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <amazonsqs.createQueue configKey="AMAZON_SQS_CONNECTION">
+        <queueName>BallerinaQueue</queueName>
+    </amazonsqs.createQueue>
+    <log level="custom">
+        <property expression="json-eval($)" name="queueURL"/>
+    </log>
+    <property expression="json-eval($.CreateQueueResponse.CreateQueueResult.QueueUrl)" name="queueURL" scope="default" type="STRING"/>
+    <log level="custom">
+        <property expression="$ctx:queueURL" name="queueURL"/>
+    </log>
+    <log category="INFO" logMessageID="false" logFullPayload="false">
+        <message>Queue Created Successfully</message>
+    </log>
+</sequence>

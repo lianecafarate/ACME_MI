@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry key="AMAZON_SQS_CONNECTION" xmlns="http://ws.apache.org/ns/synapse">
+  <amazonsqs.init>
+    <connectionType>amazonsqs</connectionType>
+    <region>us-east-2</region>
+    <accessKeyId>${env:AWS_ACCESS_KEY_ID}</accessKeyId>
+    <secretAccessKey>${env:AWS_SECRET_ACCESS_KEY}</secretAccessKey>
+    <name>AMAZON_SQS_CONNECTION</name>
+  </amazonsqs.init>
+</localEntry>

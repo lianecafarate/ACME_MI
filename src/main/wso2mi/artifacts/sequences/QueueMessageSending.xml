@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="QueueMessageSending" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <amazonsqs.sendMessage configKey="AMAZON_SQS_CONNECTION">
+        <queueUrl>{$ctx:queueURL}</queueUrl>
+        <messageBody>{$ctx:orderPayload}</messageBody>
+    </amazonsqs.sendMessage>
+    <property name="messageId" scope="default" type="STRING" expression="json-eval($.SendMessageResponse.SendMessageResult.MessageId)" description="Saving Message Id"/>
+    <log category="INFO" logMessageID="false" logFullPayload="false" description="Printing Message Id">
+        <message>${properties.synapse.messageId}</message>
+    </log>
+    <log category="INFO" logMessageID="false" logFullPayload="false" description="Message Sent Successfully">
+        <message>Message Sent to Queue Successfully!</message>
+    </log>
+</sequence>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inboundEndpoint name="AmazonSQSInboundEndpoint" class="org.wso2.carbon.inbound.amazonsqs.AmazonSQSPollingConsumer" sequence="AmazonSQSInboundEndpoint-inboundSequence" onError="AmazonSQSInboundEndpoint-inboundErrorSequence" suspend="false">
+    <parameters xmlns="http://ws.apache.org/ns/synapse">
+        <parameter name="generateSequences">true</parameter>
+        <parameter name="interval">2000</parameter>
+        <parameter name="sequential">true</parameter>
+        <parameter name="coordination">true</parameter>
+        <parameter name="destination">https://sqs.us-east-2.amazonaws.com/181851924654/BallerinaQueue</parameter>
+        <parameter name="contentType">text/plain</parameter>
+        <parameter name="accessKey">${env:AWS_ACCESS_KEY_ID}</parameter>
+        <parameter name="secretKey">${env:AWS_SECRET_ACCESS_KEY}</parameter>       
+        <parameter name="autoRemoveMessage">true</parameter>
+        <parameter name="attributeNames">All</parameter>
+    </parameters>
+</inboundEndpoint>

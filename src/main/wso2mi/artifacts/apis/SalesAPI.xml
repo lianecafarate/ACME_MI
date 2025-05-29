@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/sales" name="SalesAPI" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET" uri-template="/?customerId={customerId}">
+        <inSequence>
+            <log category="INFO" logMessageID="false" logFullPayload="false" description="Starting the GET Sales by customerId">
+                <message>Incoming Sales Request</message>
+            </log>
+            <log category="INFO" logMessageID="false" logFullPayload="false" description="CustomerID">
+                <message>Customer ID is present: ${params.queryParams.customerId}</message>
+            </log>
+            <sequence key="DBSalesByCustomerId" description="Retrieving sales from a customer"/>
+            <log category="INFO" logMessageID="false" logFullPayload="false">
+                    <message>Variables after Sales Sequence</message>
+                    <property name="customerId" expression="get-property('uri.var.customerId')"/>
+                    <property name="totalSpent" expression="get-property('totalSpent')"/>
+                    <property name="totalOrders" expression="get-property('totalOrders')"/>
+                    <property name="lastOrderDate" expression="get-property('lastOrderDate')"/>
+            </log>
+            <payloadFactory media-type="json" template-type="default">
+                <format>{
+                    "customerId": "${params.queryParams.customerId}",
+                    "totalSpent": "${properties.synapse.totalSpent}",
+                    "totalOrders": "${properties.synapse.totalOrders}",
+                    "lastOrderDate": "${properties.synapse.lastOrderDate}"
+                }</format>
+                
+            </payloadFactory>
+            <respond />
+        </inSequence>
+    </resource>
+</api>

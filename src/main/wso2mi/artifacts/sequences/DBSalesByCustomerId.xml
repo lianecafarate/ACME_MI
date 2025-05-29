@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="DBSalesByCustomerId" xmlns="http://ws.apache.org/ns/synapse">
+    <dblookup>
+        <connection>
+            <pool>
+                <driver>com.mysql.cj.jdbc.Driver</driver>
+                <url>jdbc:mysql://localhost:3306/acme_inc</url>
+                <user>${env:DB_USER}</user>
+                <password>${env:DB_PASSWORD}</password>
+            </pool>
+        </connection>
+        <statement>
+            <sql>
+                SELECT
+                customer_id,
+                SUM(total_amount) AS total_spent,
+                COUNT(order_id) AS total_orders,
+                MAX(order_timestamp) AS last_order_date
+                FROM orders
+                WHERE customer_id = ?
+                GROUP BY customer_id
+            </sql>
+            <parameter expression="get-property('uri.var.customerId')" type="VARCHAR"/>
+            <result name="totalSpent" column="total_spent"/>
+            <result name="totalOrders" column="total_orders"/>
+            <result name="lastOrderTimestamp" column="last_order_date"/>
+        </statement>
+    </dblookup>
+    <log category="INFO" logMessageID="false" logFullPayload="false">
+        <message>Variables after querying DB</message>
+        <property name="customerId" expression="get-property('uri.var.customerId')"/>
+        <property name="totalSpent" expression="get-property('totalSpent')"/>
+        <property name="totalOrders" expression="get-property('totalOrders')"/>
+        <property name="lastOrderTimestamp" expression="get-property('lastOrderTimestamp')"/>
+    </log>
+    <sequence key="OrderTimestampTransformation"/>
+    <log category="INFO" logMessageID="false" logFullPayload="false">
+        <message>Timestamp transformed into OrderDate</message>
+        <property name="customerId" expression="get-property('lastOrderDate')"/>
+    </log>
+</sequence>
