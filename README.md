@@ -14,6 +14,7 @@ This project demonstrates a solution for ACME Inc., a fictional e-commerce compa
   - [Sales API Flow](#sales-api-flow)
 - [Technologies Used](#technologies-used)
 - [Prerequisites](#prerequisites)
+- [Database Script](#database-script)
 
 ## Scenario
 
@@ -44,7 +45,7 @@ The proposed solution leverages the WSO2 platform to ensure guaranteed order del
 
 ## Demonstration Flows
 
-![Demonstration Flows](assets/Flows.png "Demonstration Flows")
+![Demonstration Flows](https://github.com/lianecafarate/ACME_MI/blob/main/assets/images/Flows.png)
 
 ### Order API Flow
 1.  **Receive Order**: Customers place an order via a POST request to the Order API endpoint, managed by the WSO2 API Manager. 
@@ -76,4 +77,9 @@ The proposed solution leverages the WSO2 platform to ensure guaranteed order del
   * If using WSO2 API Manager, create and publish the OrderAPI and SalesAPI, pointing them to the deployed Micro Integrator endpoints. It is easier if you use the [Service Catalog](https://mi.docs.wso2.com/en/latest/install-and-setup/setup/deployment/deploying-wso2-mi/#service-catalog) feature.
 * AWS SQS queue set up and accessible.
 * MySQL database instance.
+
+## Database Script
+![DB Diagram](https://github.com/lianecafarate/ACME_MI/blob/main/assets/images/DBDiagram.png)
+File: [https://github.com/lianecafarate/ACME_MI/blob/main/assets/database/mysql.sql](https://github.com/lianecafarate/ACME_MI/blob/main/assets/database/mysql.sql)
+
 
