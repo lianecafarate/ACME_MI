@@ -44,6 +44,8 @@ The proposed solution leverages the WSO2 platform to ensure guaranteed order del
 
 ## Demonstration Flows
 
+![Demonstration Flows](assets/Flows.png "Demonstration Flows")
+
 ### Order API Flow
 1.  **Receive Order**: Customers place an order via a POST request to the Order API endpoint, managed by the WSO2 API Manager. 
 2.  **Queue Publishing**: The Micro Integrator receives the order and publishes it to an AWS SQS queue using the WSO2 Amazon SQS connector. 
