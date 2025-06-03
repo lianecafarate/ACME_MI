@@ -1,5 +1,8 @@
 # ACME Inc. Order Processing and Sales Data API
 
+***⚠️ For Testing & Demo Purposes Only***
+> This configuration is intended strictly for local testing, experimentation, and demonstration. It is NOT secured, optimized, or configured for production environments.
+
 ## Overview
 
 This project demonstrates a solution for ACME Inc., a fictional e-commerce company, to reliably process customer orders, integrate data with internal systems, and securely expose this information via APIs. The demonstration utilizes WSO2 Micro Integrator for integration workflows and WSO2 API Manager for API exposure and management.
